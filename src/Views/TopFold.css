@@ -1,0 +1,151 @@
+/* ===== Reset + Safari edge fixes ===== */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background:#000; color:#fff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+:root, * { background-color: transparent; }     /* prevents weird gutters */
+body { overflow-x: hidden; }
+
+/* ===== Section shell ===== */
+.hero { position: relative; min-height: 100vh; min-height: 100dvh; isolation: isolate; }
+.hero__bg {
+  position: absolute; inset: -24px;             /* overdrawing prevents thin lines */
+  width: calc(100% + 48px); height: calc(100% + 48px);
+  object-fit: cover; filter: brightness(.55);
+  z-index: -2;
+}
+.hero__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.55), rgba(0,0,0,.62)); z-index: -1; }
+
+.container { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+/* ===== Topline ===== */
+.topline { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 16px; }
+.addr, .hours { font: 600 12px/1.2 Inter, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: #f1f1f1cc; }
+
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color:#fff; }
+.brand-logo { display:block; border-radius: 8px; }
+.brand-name { font-weight: 800; font-size: 22px; letter-spacing: -.01em; }
+.brand-name .pinoy { color: #f7c316; }
+
+/* ===== Reservation CTA ===== */
+.reserve-wrap { justify-self: end; display:flex; align-items:center; gap: 14px; }
+.btn-reserve {
+  appearance: none; border:0; border-radius: 999px; padding: 12px 18px;
+  font: 800 14px/1 Inter, sans-serif; color:#fff; background:#ff5334;
+  box-shadow: 0 10px 24px rgba(255,83,52,.35); cursor:pointer;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+.btn-reserve:hover { transform: scale(1.05); box-shadow: 0 14px 28px rgba(255,83,52,.45); }
+.btn-reserve:active { transform: scale(1.02); }
+
+/* ===== Nav ===== */
+.nav { display:flex; gap:40px; justify-content:center; margin: 18px 0 0; }
+.nav a {
+  color:#f0f0f0dd; text-decoration:none; font: 700 13px/1 Inter; letter-spacing:.06em; text-transform:uppercase;
+  display:inline-block; transition: transform 160ms ease, color 160ms ease;
+}
+.nav a:hover { color:#fff; transform: scale(1.06); }
+
+/* ===== Content grid ===== */
+.content { display:grid; grid-template-columns: 1.1fr .9fr; gap:48px; align-items:center; margin-top:56px; }
+
+/* Rating pill */
+.rating { display:inline-flex; align-items:center; gap:10px; padding:10px 14px; border-radius:999px; background: rgba(255,255,255,.10); backdrop-filter: blur(8px); border:1px solid rgba(255,255,255,.10); }
+.avatars { display:flex; }
+.avatar { width:22px; height:22px; border-radius:50%; background:#cfcfcf; border:2px solid #fff; margin-right:-8px; }
+.dot { width:6px; height:6px; border-radius:50%; background:#fff; opacity:.8; }
+.rating-text { font: 700 13px/1 Inter; }
+
+/* Headline & copy */
+.h1 { font: 900 clamp(40px,6vw,72px)/1.05 Inter, sans-serif; margin: 18px 0; letter-spacing: -.02em; }
+.sub { max-width: 560px; color:#f0f0f0d0; font: 500 16px/1.6 Inter, sans-serif; }
+
+/* CTA (generic) */
+.cta { margin-top: 28px; }
+.btn { display:inline-flex; align-items:center; gap:10px; border:none; border-radius:999px; padding:14px 18px; font: 800 15px/1 Inter; text-decoration:none; }
+.btn-primary { background:#ff5334; color:#fff; box-shadow: 0 14px 28px rgba(255,83,52,.35); }
+
+/* Testimonial card */
+.card {
+  justify-self:end; max-width:420px; background: rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.12); backdrop-filter: blur(12px);
+  border-radius: 18px; padding: 18px; box-shadow: 0 20px 40px rgba(0,0,0,.35);
+}
+.avatar-large { width:64px; height:64px; border-radius:50%; object-fit:cover; border:3px solid rgba(255,255,255,.35); display:block; margin-bottom:10px; }
+.name { font: 800 15px/1 Inter; margin: 0 0 6px; }
+.quote { margin: 0; font: 500 15px/1.6 Inter; color:#fff; }
+
+/* ===== Responsive tweaks ===== */
+
+/* --- Large tablet (≤ 1024px) --- */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .container { padding: 20px; }
+  .nav { gap: 28px; }
+  .h1 { font: 900 clamp(38px,6.5vw,64px)/1.05 Inter, sans-serif; }
+  .sub { font-size: 15px; }
+}
+
+/* --- Tablet (≤ 900px) --- */
+@media (max-width: 900px) {
+  .content { grid-template-columns: 1fr; gap:28px; margin-top:36px; }
+  .card { justify-self: stretch; }
+  .nav { gap: 24px; margin-top: 14px; }
+  .reserve-wrap { justify-self: end; gap: 10px; }
+  .h1 { font: 900 clamp(34px,7.5vw,56px)/1.05 Inter, sans-serif; }
+}
+
+/* --- Small tablet / large phone (≤ 700px) --- */
+@media (max-width: 700px) {
+  .container { padding: 18px; }
+  .topline {
+    grid-template-columns: 1fr auto;           /* addr on left, brand on right */
+    gap: 12px;
+  }
+  .addr { font-size: 11px; }
+  .brand-name { font-size: 20px; }
+  .btn-reserve { padding: 12px 16px; font-size: 13px; }
+  .nav { gap: 20px; flex-wrap: wrap; }
+  .nav a { font-size: 12px; }
+  .sub { font-size: 15px; }
+}
+
+/* --- Phone (≤ 520px) --- */
+@media (max-width: 520px) {
+  .topline {
+    grid-template-columns: 1fr;                 /* stack */
+    row-gap: 10px;
+    justify-items: center;
+    text-align: center;
+  }
+  .addr { display: none; }                      /* declutter on small screens */
+  .reserve-wrap { width: 100%; justify-content: center; }
+  .btn-reserve { width: 100%; max-width: 360px; }
+  .nav { gap: 16px; }
+  .h1 { font: 900 clamp(28px,9vw,44px)/1.07 Inter, sans-serif; margin-top: 4px; }
+  .sub { font-size: 14px; }
+  .rating { transform: scale(.95); }
+}
+
+/* --- Very small phones (≤ 360px) --- */
+@media (max-width: 360px) {
+  .brand-name { font-size: 18px; }
+  .nav { gap: 12px; }
+  .nav a { font-size: 11px; letter-spacing: .05em; }
+  .btn { padding: 12px 16px; font-size: 14px; }
+  .btn-reserve { padding: 10px 14px; font-size: 13px; }
+}
+
+/* ===== Motion preferences ===== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .btn-reserve:hover, .nav a:hover { transform: none !important; }
+}
+/* Push the utility line farther left on desktop and add more space from the logo */
+@media (min-width: 1024px) {
+  .topline { gap: 135px; }              /* was 16px — increases space around the logo */
+  .addr {
+    justify-self: start;               /* pin to the left edge of its column */
+    text-align: left;
+  }
+}
+@media (min-width: 1280px) {
+  .addr { margin-left: -8px; }         /* optional micro-nudge toward the left */
+}

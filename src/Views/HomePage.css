@@ -1,41 +1,48 @@
-/* src/Views/HomePage.css */
-.cafe-homepage {
-    text-align: center;
-    padding: 50px;
-}
-
-.cafe-homepage h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-}
-
-.cafe-homepage p {
-    font-size: 1.5rem;
-    color: #555;
-}
-
-.cafe-color-box {
-    width: 100px;
-    height: 100px;
-    margin: 20px auto;
-    transition: background-color 0.5s ease-in-out;
-}
-
-.cafe-color-box.cafe-red {
-    background-color: red;
-}
-
-.cafe-color-box.cafe-blue {
-    background-color: blue;
-}
-
-.cafe-button {
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.cafe-button:hover {
-    background-color: #ddd;
-}
+/* Brand hover/focus */
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color:#fff;
+    transition: transform 160ms ease, filter 160ms ease;
+    will-change: transform;
+  }
+  .brand-logo {
+    display:block;
+    border-radius: 8px;
+    transition: transform 160ms ease, box-shadow 160ms ease;
+  }
+  .brand-name {
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: -.01em;
+    transition: transform 160ms ease, text-shadow 160ms ease, color 160ms ease;
+  }
+  .brand-name .pinoy { color: #f7c316; transition: color 160ms ease; }
+  
+  /* hover + keyboard focus */
+  .brand:hover,
+  .brand:focus-visible {
+    transform: scale(1.04);
+  }
+  .brand:hover .brand-logo,
+  .brand:focus-visible .brand-logo {
+    transform: scale(1.06);
+    box-shadow: 0 8px 22px rgba(0,0,0,.45);
+  }
+  .brand:hover .brand-name,
+  .brand:focus-visible .brand-name {
+    text-shadow: 0 1px 0 rgba(0,0,0,.25);
+  }
+  .brand:hover .brand-name .pinoy,
+  .brand:focus-visible .brand-name .pinoy {
+    color: #ffd54a; /* a touch brighter on hover */
+  }
+  
+  /* keep motion-friendly */
+  @media (prefers-reduced-motion: reduce) {
+    .brand, .brand-logo, .brand-name { transition: none !important; }
+    .brand:hover, .brand:focus-visible { transform: none !important; }
+  }
+  
