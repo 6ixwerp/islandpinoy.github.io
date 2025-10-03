@@ -1,7 +1,8 @@
 // src/Views/HomePage.js
 import React, { useState } from 'react';
 import './HomePage.css';
-
+import Footer from './Footer.js';
+import TopFold from './TopFold.js';
 const HomePage = () => {
     const [isBlue, setIsBlue] = useState(false);
 
@@ -11,10 +12,8 @@ const HomePage = () => {
 
     return (
         <div className="cafe-homepage">
-            <h1>Welcome to Island Pinoy</h1>
-            <p>Your go-to for everything Filipino fusion.</p>
-            <div className={`cafe-color-box ${isBlue ? 'cafe-blue' : 'cafe-red'}`}></div>
-            <button className="cafe-button" onClick={toggleColor}>Change Color</button>
+            <TopFold />
+            <Footer />
         </div>
     );
 };
