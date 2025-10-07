@@ -1,0 +1,90 @@
+/* ===== Shared Header (About/Menu/Gallery/Contact pages) ===== */
+
+header {
+  position: relative;
+  z-index: 5;
+  background: transparent;
+  color: #e9edf8;
+}
+
+header .container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px 24px 0;
+}
+
+header .topline {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+}
+
+header .addr {
+  font-size: 12px;
+  opacity: .9;
+}
+
+header .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+.brand-logo { border-radius: 8px; }
+.brand-name { font-weight: 800; font-size: 22px; letter-spacing: .2px; }
+.brand-name .pinoy { color: #ffd24d; }
+
+header .reserve-wrap { display: flex; align-items: center; }
+header .btn-reserve {
+  appearance: none;
+  border: 0;
+  background: #ff623d;
+  color: #fff;
+  padding: 12px 18px;
+  font-weight: 700;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(255,98,61,.35);
+}
+
+header .nav {
+  display: flex;
+  gap: 24px;
+  margin: 14px 0 18px;
+}
+header .nav-link {
+  color: #e9edf8;
+  text-decoration: none;
+  opacity: .85;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: .06em;
+}
+header .nav-link.is-active,
+header .nav-link[aria-current="page"] {
+  opacity: 1;
+  border-bottom: 2px solid #ffd24d;
+  padding-bottom: 4px;
+}
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  header .container { padding: 12px 16px 0; }
+  header .topline {
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+  }
+  header .addr { grid-column: 1 / -1; font-size: 12px; }
+  .brand-name { font-size: 18px; }
+  header .btn-reserve { padding: 10px 14px; font-size: 14px; }
+
+  header .nav {
+    gap: 16px;
+    margin: 8px 0 12px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  header .nav-link { font-size: 14px; padding: 6px 2px; white-space: nowrap; }
+}

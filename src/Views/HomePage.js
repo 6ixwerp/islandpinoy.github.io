@@ -1,8 +1,8 @@
 // src/Views/HomePage.js
 import React, { useState } from 'react';
 import './HomePage.css';
-import Footer from './Footer.js';
-import TopFold from './TopFold.js';
+import TopFold from './TopFold';
+
 const HomePage = () => {
     const [isBlue, setIsBlue] = useState(false);
 
@@ -13,7 +13,6 @@ const HomePage = () => {
     return (
         <div className="cafe-homepage">
             <TopFold />
-            <Footer />
         </div>
     );
 };

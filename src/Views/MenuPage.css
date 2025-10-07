@@ -1,0 +1,36 @@
+/* Simple, clean page for the Menu */
+.menu-page { background:#000; color:#fff; min-height:100vh; }
+.menu-header {
+  display:flex; align-items:center; justify-content:space-between;
+  max-width:1200px; margin:0 auto; padding:18px 24px;
+}
+.brand-link { display:inline-flex; gap:10px; align-items:center; text-decoration:none; color:#fff; }
+.brand-name { font-weight:800; font-size:22px; letter-spacing:-.01em; }
+.brand-name .pinoy { color:#f7c316; }
+
+.menu-nav { display:flex; gap:24px; }
+.menu-nav .nav-link {
+  color:#f0f0f0dd; text-decoration:none; font:700 13px/1 Inter, sans-serif; text-transform:uppercase;
+}
+.menu-nav .nav-link:hover { color:#fff; }
+
+.menu-hero { text-align:center; padding:12px 24px 0; }
+.menu-title { margin:16px 0 4px; font:900 clamp(32px,6vw,56px)/1.05 Inter, sans-serif; }
+.menu-sub { margin:0; color:#cfd3df; font:500 15px/1.6 Inter, sans-serif; }
+
+.menu-content {
+  max-width:1200px; margin:24px auto 40px; padding:0 24px;
+  display:grid; gap:20px;
+}
+.menu-img {
+  width:100%; height:auto; display:block; border-radius:14px;
+  box-shadow: 0 24px 48px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08) inset;
+}
+
+.menu-footer { max-width:1200px; margin:0 auto; padding:0 24px 32px; }
+.back-home { color:#e6ebff; text-decoration:none; font:600 14px/1 Inter, sans-serif; }
+.back-home:hover { text-decoration:underline; }
+
+@media (max-width: 520px) {
+  .menu-nav { gap:16px; }
+}

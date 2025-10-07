@@ -1,0 +1,76 @@
+/* Modal shell */
+.menu-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,.55); backdrop-filter: blur(2px);
+    z-index: 9998; opacity: 1;
+  }
+  .menu-dialog {
+    position: fixed; inset: 6vh 4vw auto 4vw; bottom: 6vh;
+    z-index: 9999; background: #0a0a0a; color:#fff;
+    border: 1px solid rgba(255,255,255,.12); border-radius: 16px;
+    box-shadow: 0 30px 80px rgba(0,0,0,.6);
+    padding: 18px 18px 22px;
+    max-width: 1100px; margin: 0 auto;
+  }
+  .menu-close {
+    position:absolute; top:10px; right:12px;
+    width:36px; height:36px; border-radius:999px; border:1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.06); color:#fff; font-size:22px; line-height:1;
+    cursor:pointer;
+  }
+  .menu-close:hover { background: rgba(255,255,255,.12); }
+  .menu-title { margin: 0 0 4px; font: 800 20px/1.2 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+  .menu-sub   { margin: 0 0 14px; color:#cfd3df; font: 500 13px/1.5 Inter, sans-serif; }
+  
+  /* Gallery grid */
+  .menu-gallery {
+    display:grid; gap:12px;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .menu-thumb {
+    appearance:none; padding:0; margin:0; border:0; background:transparent; cursor:pointer;
+    border-radius: 12px; overflow:hidden; border:1px solid rgba(255,255,255,.10);
+  }
+  .menu-thumb img {
+    width:100%; height: 160px; object-fit: cover; display:block;
+    transform: scale(1.001); transition: transform .2s ease, filter .2s ease;
+    filter: saturate(1.02);
+  }
+  .menu-thumb:hover img { transform: scale(1.04); filter: saturate(1.1); }
+  
+  /* Lightbox (on top of modal) */
+  .lightbox {
+    position: fixed; inset: 0; background: rgba(0,0,0,.85);
+    display:flex; align-items:center; justify-content:center;
+    z-index: 10000;
+  }
+  .lightbox-img { max-width: 92vw; max-height: 86vh; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,.6); }
+  .lightbox-nav {
+    position: fixed; left: 0; right: 0; bottom: clamp(12px, 4vh, 28px);
+    display:flex; gap:12px; justify-content:center;
+  }
+  .lightbox-btn {
+    min-width:44px; height:44px; padding:0 12px; border-radius: 999px; border:1px solid rgba(255,255,255,.2);
+    background: rgba(255,255,255,.08); color:#fff; font-size:22px; cursor:pointer;
+  }
+  .lightbox-btn:disabled { opacity:.45; cursor:not-allowed; }
+  
+  /* Responsive */
+  @media (max-width: 1000px) { .menu-gallery { grid-template-columns: repeat(3,1fr); } .menu-thumb img { height: 150px; } }
+  @media (max-width: 720px)  { .menu-dialog { inset: 5vh 3vw auto 3vw; bottom: 5vh; } .menu-gallery { grid-template-columns: repeat(2,1fr); } .menu-thumb img { height:140px; } }
+  @media (max-width: 460px)  { .menu-dialog { inset: 0; border-radius:0; height:100vh; overflow:auto; }
+                               .menu-title{ font-size:18px; } .menu-gallery{ gap:10px; } .menu-thumb img{ height:120px; } }
+  @media (prefers-reduced-motion: reduce) { *,*::before,*::after { transition:none !important; } }
+  /* Floating close button for lightbox-only mode */
+.menu-close--floating {
+    position: fixed;
+    top: 12px;
+    right: 14px;
+    z-index: 10001;
+  }
+  
+  /* Ensure the full-screen lightbox covers everything */
+  .lightbox--solo {
+    position: fixed;
+    inset: 0;
+  }
+  

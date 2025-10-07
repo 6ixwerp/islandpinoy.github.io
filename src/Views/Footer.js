@@ -2,15 +2,15 @@
 import React from "react";
 import "./Footer.css";
 
-const FACEBOOK_URL = "https://www.facebook.com/yourpage";     // ← replace
-const INSTAGRAM_URL = "https://www.instagram.com/islandpinoycatering"; // ← replace
+const FACEBOOK_URL = "https://www.facebook.com/yourpage";
+const INSTAGRAM_URL = "https://www.instagram.com/islandpinoycatering";
 
 const Footer = () => {
   return (
     <footer className="site-footer" id="footer">
       <div className="footer-container">
         <div className="footer-grid three-col">
-          {/* LEFT: ADDRESS (single instance) */}
+          {/* LEFT: ADDRESS */}
           <div className="footer-col footer-col--left">
             <h2 className="footer-title">ADDRESS</h2>
             <p className="location-line">Vista, CA 92083</p>
@@ -45,8 +45,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* MIDDLE: CONTACT */}
-          <div className="footer-col">
+          {/* MIDDLE: CONTACT — now centered */}
+          <div className="footer-col footer-col--center">
             <h2 className="footer-title">CONTACT</h2>
             <ul className="contact-list">
               <li className="contact-item">
@@ -60,7 +60,7 @@ const Footer = () => {
               <li className="contact-item">
                 <span className="icon">
                   <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fill="currentColor" d="M20.5 5h-17A1.5 1.5 0 0 0 2 6.5v11A1.5 1.5 0 0 0 3.5 19h17a1.5 1.5 0 0 0 1.5-1.5v-11A1.5 1.5 0 0 0 20.5 5Zm-.5 2-8 5-8-5v-.5h16V7Z"/>
+                    <path fill="currentColor" d="M20.5 5h-17A1.5 1.5 0 0 0 2 6.5v11A1.5 1.5 0 0 0 3.5 19h17a1.5 1.5 0 0 0 1.5-1.5v-11A1.5 1.5 0 0 0 20.5 5Zm-.5 2-8 5-8-5v-.5h16V7Z" />
                   </svg>
                 </span>
                 <span>
@@ -70,7 +70,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* RIGHT: IMAGE FROM /public */}
+          {/* RIGHT: IMAGE */}
           <div className="footer-mark-wrap" aria-hidden="true">
             <img
               className="footer-mark"
