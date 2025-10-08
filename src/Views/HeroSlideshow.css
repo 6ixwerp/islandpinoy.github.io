@@ -1,0 +1,27 @@
+/* src/Views/HeroSlideshow.css */
+.hero-slideshow {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .hero-slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: var(--fit, cover);       /* cover or contain */
+    object-position: var(--pos, 50% 50%);/* adjust focal point when using cover */
+    transform: translateZ(0);
+    opacity: 0;
+    transition: opacity var(--fade-ms, 600ms) ease-in-out;
+    will-change: opacity;
+  }
+  .hero-slide.is-active { opacity: 1; }
+  
+  /* Dots unchanged */
+  .hero-dots { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); display:flex; gap:8px; z-index:3; }
+  .hero-dot { width: 8px; height: 8px; border-radius: 50%; border:0; background: rgba(255,255,255,0.45); cursor:pointer; }
+  .hero-dot.is-active { background: rgba(255,255,255,0.95); }
+  

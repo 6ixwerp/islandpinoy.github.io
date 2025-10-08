@@ -1,13 +1,14 @@
 /* ===== Reset + Safari edge fixes ===== */
 *, *::before, *::after { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; background:#000; color:#fff; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
-:root, * { background-color: transparent; }     /* prevents weird gutters */
+html { scroll-behavior: smooth; }  /* <— smooth scroll for #about / #contact */
+:root, * { background-color: transparent; }
 body { overflow-x: hidden; }
 
 /* ===== Section shell ===== */
 .hero { position: relative; min-height: 100vh; min-height: 100dvh; isolation: isolate; }
 .hero__bg {
-  position: absolute; inset: -24px;             /* overdrawing prevents thin lines */
+  position: absolute; inset: -24px;
   width: calc(100% + 48px); height: calc(100% + 48px);
   object-fit: cover; filter: brightness(.55);
   z-index: -2;
@@ -41,8 +42,45 @@ body { overflow-x: hidden; }
 .nav a {
   color:#f0f0f0dd; text-decoration:none; font: 700 13px/1 Inter; letter-spacing:.06em; text-transform:uppercase;
   display:inline-block; transition: transform 160ms ease, color 160ms ease;
+  position: relative;
 }
 .nav a:hover { color:#fff; transform: scale(1.06); }
+
+/* MENU button styled like a link with highlight flash */
+.nav .nav-link {
+  color:#f0f0f0dd; text-decoration:none; font:700 13px/1 Inter, sans-serif;
+  letter-spacing:.06em; text-transform:uppercase;
+  display:inline-block; background:none; border:none; padding:0; cursor:pointer;
+  position: relative;
+  transition: transform 160ms ease, color 160ms ease, text-shadow 160ms ease;
+}
+.nav .nav-link:hover { color:#fff; transform: scale(1.06); }
+
+/* === Shared underline/flash/active for ALL nav items (anchors + MENU button) === */
+.nav a::after,
+.nav .nav-link::after {
+  content:"";
+  position:absolute; left:50%; bottom:-8px;
+  height:2px; width:0; background:#f7c316; border-radius:2px;
+  transition: width 160ms ease, left 160ms ease;
+}
+.nav a:hover::after,
+.nav .nav-link:hover::after { width:100%; left:0; }
+
+/* Flash (optional if you toggle .is-pressed via JS) */
+.nav a.is-pressed,
+.nav .nav-link.is-pressed {
+  color:#fff; transform: scale(1.06);
+  text-shadow: 0 0 12px rgba(247,195,22,.55);
+}
+.nav a.is-pressed::after,
+.nav .nav-link.is-pressed::after { width:100%; left:0; }
+
+/* Persistent active underline (scrollspy/hash) */
+.nav a.is-active,
+.nav .nav-link.is-active { color:#fff; }
+.nav a.is-active::after,
+.nav .nav-link.is-active::after { width:100%; left:0; }
 
 /* ===== Content grid ===== */
 .content { display:grid; grid-template-columns: 1.1fr .9fr; gap:48px; align-items:center; margin-top:56px; }
@@ -73,6 +111,52 @@ body { overflow-x: hidden; }
 .name { font: 800 15px/1 Inter; margin: 0 0 6px; }
 .quote { margin: 0; font: 500 15px/1.6 Inter; color:#fff; }
 
+/* ===== ABOUT (homepage section) ===== */
+.about { padding: 72px 24px 96px; background:#000; color:#fff; }
+.about__wrap { max-width: 1200px; margin: 0 auto; }
+.about__title {
+  margin: 0 0 10px;
+  font: 900 clamp(28px,5vw,40px)/1.1 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  letter-spacing: -0.01em;
+}
+.about__title::after {
+  content:"";
+  display:block; height:3px; width:100px; margin-top:10px; border-radius:999px;
+  background: linear-gradient(90deg,#0038a8 0%, #f7c316 50%, #ce1126 100%); /* PH flag */
+}
+.about__text { max-width: 760px; color:#cfd3df; font: 500 16px/1.8 Inter, sans-serif; margin: 10px 0; }
+
+/* Keep anchors from hiding under the header */
+#about, #contact { scroll-margin-top: 96px; }
+
+/* ===== CONTACT (homepage section) ===== */
+.contact-section { padding: 32px 24px 96px; background:#000; }
+.contact__wrap {
+  max-width: 1200px; margin: 0 auto;
+  display:grid; grid-template-columns: 1.1fr .9fr; gap:32px; align-items:center;
+}
+.contact__card {
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: 16px; padding: 22px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.35);
+}
+.contact__title {
+  margin: 0 0 10px;
+  font: 800 22px/1.2 Inter, sans-serif;
+}
+.contact__list { list-style:none; padding:0; margin:10px 0 0; }
+.contact__list li { margin:8px 0; color:#e8ecf7; font: 600 16px/1.5 Inter, sans-serif; }
+.contact__list a { color:#f7c316; text-decoration:none; }
+.contact__list a:hover { text-decoration:underline; }
+
+.contact__visual { display:flex; justify-content:center; }
+.contact__img {
+  width: 200px; height: 200px; object-fit: cover; border-radius: 18px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.5);
+  border: 3px solid rgba(255,255,255,.2);
+}
+
 /* ===== Responsive tweaks ===== */
 
 /* --- Large tablet (≤ 1024px) --- */
@@ -90,32 +174,33 @@ body { overflow-x: hidden; }
   .nav { gap: 24px; margin-top: 14px; }
   .reserve-wrap { justify-self: end; gap: 10px; }
   .h1 { font: 900 clamp(34px,7.5vw,56px)/1.05 Inter, sans-serif; }
+
+  .contact__wrap { grid-template-columns: 1fr; }
 }
 
 /* --- Small tablet / large phone (≤ 700px) --- */
 @media (max-width: 700px) {
   .container { padding: 18px; }
-  .topline {
-    grid-template-columns: 1fr auto;           /* addr on left, brand on right */
-    gap: 12px;
-  }
+  .topline { grid-template-columns: 1fr auto; gap: 12px; }
   .addr { font-size: 11px; }
   .brand-name { font-size: 20px; }
   .btn-reserve { padding: 12px 16px; font-size: 13px; }
   .nav { gap: 20px; flex-wrap: wrap; }
-  .nav a { font-size: 12px; }
+  .nav a, .nav .nav-link { font-size: 12px; }
   .sub { font-size: 15px; }
+
+  .contact__img { width: 160px; height: 160px; }
 }
 
 /* --- Phone (≤ 520px) --- */
 @media (max-width: 520px) {
   .topline {
-    grid-template-columns: 1fr;                 /* stack */
+    grid-template-columns: 1fr;
     row-gap: 10px;
     justify-items: center;
     text-align: center;
   }
-  .addr { display: none; }                      /* declutter on small screens */
+  .addr { display: none; }
   .reserve-wrap { width: 100%; justify-content: center; }
   .btn-reserve { width: 100%; max-width: 360px; }
   .nav { gap: 16px; }
@@ -128,7 +213,7 @@ body { overflow-x: hidden; }
 @media (max-width: 360px) {
   .brand-name { font-size: 18px; }
   .nav { gap: 12px; }
-  .nav a { font-size: 11px; letter-spacing: .05em; }
+  .nav a, .nav .nav-link { font-size: 11px; letter-spacing: .05em; }
   .btn { padding: 12px 16px; font-size: 14px; }
   .btn-reserve { padding: 10px 14px; font-size: 13px; }
 }
@@ -136,16 +221,66 @@ body { overflow-x: hidden; }
 /* ===== Motion preferences ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; }
-  .btn-reserve:hover, .nav a:hover { transform: none !important; }
+  .btn-reserve:hover, .nav a:hover, .nav .nav-link:hover { transform: none !important; }
 }
+
 /* Push the utility line farther left on desktop and add more space from the logo */
 @media (min-width: 1024px) {
-  .topline { gap: 135px; }              /* was 16px — increases space around the logo */
-  .addr {
-    justify-self: start;               /* pin to the left edge of its column */
-    text-align: left;
-  }
+  .topline { gap: 135px; }
+  .addr { justify-self: start; text-align: left; }
 }
 @media (min-width: 1280px) {
-  .addr { margin-left: -8px; }         /* optional micro-nudge toward the left */
+  .addr { margin-left: -8px; }
 }
+/* Make sure .hero is a positioning context */
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Keep overlay above slideshow, below text */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 25% 25%, rgba(0,0,0,0.35), rgba(0,0,0,0.75) 70%);
+  z-index: 1;
+}
+
+/* Your text/content wrapper should already be above overlay */
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+/* Ensure the hero establishes a stacking context */
+.hero {
+  position: relative;
+}
+
+/* Slideshow sits at the bottom layer */
+.hero .hero-slideshow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* The dark overlay should NOT intercept clicks */
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  /* your existing background/gradient stays */
+  pointer-events: none;   /* ← crucial */
+  z-index: 1;             /* below interactive content */
+}
+
+/* All visible UI/content sits above the overlay */
+.hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Extra insurance that the CTA is clickable */
+.btn-reserve {
+  position: relative;
+  z-index: 3;
+}
+

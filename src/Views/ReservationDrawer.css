@@ -1,0 +1,176 @@
+ /* ===== Reservation Drawer (global) ===== */
+
+.resv-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 70;
+  }
+  
+  /* Drawer shell */
+  .resv-drawer {
+    position: fixed;
+    top: 0;
+    right: -420px;          /* hidden off-screen by default */
+    width: 420px;
+    height: 100vh;
+    background: #0b0d12;
+    color: #e9edf8;
+    z-index: 80;
+    box-shadow: -20px 0 60px rgba(0,0,0,.55);
+    transition: right .22s ease;
+    display: grid;
+    grid-template-rows: auto 1fr;  /* header + scrollable form */
+  }
+  
+  .resv-drawer.is-open { right: 0; }
+  
+  /* Header */
+  .resv-header {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 16px 16px 10px;
+    background: #0b0d12;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  .resv-header h2 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 800;
+  }
+  .resv-close {
+    border: 0;
+    background: rgba(255,255,255,.08);
+    color: #fff;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    line-height: 1;
+  }
+  
+  /* Form area */
+  .resv-form {
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+    padding: 14px 16px 18px;
+    display: grid;
+    gap: 12px;
+  }
+  
+  .field { display: grid; gap: 6px; }
+  .field.two {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  label {
+    font-size: 13px;
+    opacity: .85;
+  }
+  
+  input, textarea {
+    width: 100%;
+    background: #0f1118;
+    border: 1px solid rgba(255,255,255,.10);
+    color: #e9edf8;
+    border-radius: 10px;
+    padding: 11px 12px;
+    outline: none;
+    font-size: 15px;
+  }
+  input:focus, textarea:focus {
+    border-color: rgba(255,255,255,.22);
+    box-shadow: 0 0 0 3px rgba(255,255,255,.06) inset;
+  }
+  textarea { resize: vertical; min-height: 96px; }
+  
+  /* Actions */
+  .resv-actions {
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background:
+      linear-gradient(to top, rgba(11,13,18,1), rgba(11,13,18,.92) 65%, rgba(11,13,18,0));
+    padding: 12px 0 0;
+    margin-top: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  
+  .resv-submit, .resv-call {
+    appearance: none;
+    border: 0;
+    border-radius: 12px;
+    padding: 12px 14px;
+    font-weight: 800;
+    cursor: pointer;
+    font-size: 15px;
+  }
+  
+  .resv-submit {
+    background: #ff623d;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(255,98,61,.35);
+  }
+  .resv-submit:disabled {
+    opacity: .55;
+    cursor: not-allowed;
+  }
+  
+  .resv-call {
+    background: rgba(255,255,255,.10);
+    color: #fff;
+  }
+  
+  .resv-fine {
+    font-size: 12px;
+    opacity: .8;
+    margin: 8px 2px 0;
+  }
+  
+  /* ===== Mobile & Tablet ===== */
+  @media (max-width: 768px) {
+    .resv-drawer {
+      width: 100vw;
+      right: -100vw;              /* hidden off-screen */
+      /* Modern viewport units for mobile browsers */
+      height: 100dvh;
+    }
+    /* Fallback for older browsers */
+    @supports not (height: 100dvh) {
+      .resv-drawer { height: 100vh; }
+    }
+    .resv-drawer.is-open { right: 0; }
+  
+    /* Respect iOS/Android safe areas */
+    .resv-header {
+      padding-top: calc(12px + env(safe-area-inset-top));
+      padding-left:  max(12px, env(safe-area-inset-left));
+      padding-right: max(12px, env(safe-area-inset-right));
+    }
+    .resv-form {
+      padding-left:  max(16px, env(safe-area-inset-left));
+      padding-right: max(16px, env(safe-area-inset-right));
+      padding-bottom: calc(18px + env(safe-area-inset-bottom));
+    }
+    .resv-actions {
+      grid-template-columns: 1fr;   /* stack buttons */
+      gap: 12px;
+      padding-bottom: calc(6px + env(safe-area-inset-bottom));
+    }
+  
+    .field.two { grid-template-columns: 1fr; gap: 12px; }
+    .resv-close { width: 36px; height: 36px; font-size: 22px; }
+    input, textarea { font-size: 16px; } /* avoid iOS zoom */
+  }
+  

@@ -1,0 +1,66 @@
+/* src/Views/AboutPage.css */
+/* Make About page background pure black */
+.about-page {
+  background-color: #000;   /* ← black */
+  min-height: 100vh;        /* cover full viewport height */
+}
+
+
+.about-hero {
+  max-width: 1200px;
+  margin: 40px auto 80px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.about-text {
+  line-height: 1.6;
+}
+
+.about-title {
+  font-family: "Georgia", "Times New Roman", serif;
+  font-size: clamp(30px, 3vw, 55px);
+  line-height: 1.05;
+  margin: 10px 0 20px;
+  letter-spacing: 0.3px;
+}
+
+.about-lede {
+  font-size: 1.125rem;
+  opacity: 0.95;
+  margin-bottom: 14px;
+}
+
+.about-body {
+  font-size: 1.05rem;
+  opacity: 0.9;
+  margin: 10px 0;
+}
+
+.about-image {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+
+.about-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .about-image {
+    order: -1; /* image on top for mobile */
+  }
+}

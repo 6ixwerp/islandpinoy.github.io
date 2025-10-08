@@ -1,0 +1,16 @@
+/* Make the shell a column so the footer can sit at the bottom */
+html, body, #root {
+    height: 100%;
+  }
+  
+  .app-shell {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Footer will push to the bottom if content is short */
+  .site-footer {
+    margin-top: auto;
+  }
+  
