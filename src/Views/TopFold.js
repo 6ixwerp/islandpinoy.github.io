@@ -6,13 +6,13 @@ import HeroSlideshow from "./HeroSlideshow";
 import "./TopFold.css";
 
 // images of food imported
-import food8 from "../assets/images/food8.png";
-import food6 from "../assets/images/food6.png";
-import food17 from "../assets/images/food17.png";
-import food1 from "../assets/images/food1.png";
-import food9 from "../assets/images/food9.png";
+import food3 from "../assets/images/food3.webp";
+import food2 from "../assets/images/food2.webp";
+import food17 from "../assets/images/food17.webp";
+import food1 from "../assets/images/food1.webp";
+import food9 from "../assets/images/food9.webp";
 
-const heroImages = [food17, food6, food8, food1, food9];
+const heroImages = [food17, food2, food3, food1, food9];
 
 const TopFold = () => {
   const location = useLocation();

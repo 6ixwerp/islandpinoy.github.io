@@ -22,7 +22,7 @@
 
 .about-title {
   font-family: "Georgia", "Times New Roman", serif;
-  font-size: clamp(36px, 6vw, 56px);
+  font-size: clamp(30px, 3vw, 55px);
   line-height: 1.05;
   margin: 10px 0 20px;
   letter-spacing: 0.3px;

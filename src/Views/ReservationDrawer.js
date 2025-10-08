@@ -77,7 +77,7 @@ export default function ReservationDrawer() {
         aria-hidden={!open}
       >
         <header className="resv-header">
-          <h2 id="resv-title">Request a Reservation</h2>
+          <h2 id="resv-title">Let's book your event!</h2>
           <button className="resv-close" type="button" onClick={() => setOpen(false)} aria-label="Close">×</button>
         </header>
 

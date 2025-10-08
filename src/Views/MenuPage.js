@@ -1,7 +1,7 @@
 // src/Views/MenuPage.js
 import React from "react";
 import SiteHeader from "./SiteHeader";
-import menuImg from "../assets/images/menu.png";
+import menuImg from "../assets/images/menu.jpg";
 import "./MenuPage.css";
 
 const MenuPage = () => {

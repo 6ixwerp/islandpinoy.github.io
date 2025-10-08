@@ -3,7 +3,7 @@ import React from "react";
 import SiteHeader from "./SiteHeader";
 import "./ContactPage.css";
 
-import hero from "../assets/images/contactPic.png";
+import hero from "../assets/images/contactPic.webp";
 
 const FACEBOOK_URL = "https://www.facebook.com/yourpage";
 const INSTAGRAM_URL = "https://www.instagram.com/islandpinoycatering";

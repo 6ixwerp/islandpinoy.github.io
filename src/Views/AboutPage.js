@@ -5,7 +5,7 @@ import SiteHeader from "./SiteHeader";
 import "./AboutPage.css";
 
 // Put a wide/vertical hero image at: src/assets/images/about-hero.jpg
-import hero from "../assets/images/contactPic.png";
+import hero from "../assets/images/contactPic.webp";
 
 export default function AboutPage() {
   return (
