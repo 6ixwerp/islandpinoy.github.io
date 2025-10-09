@@ -28,3 +28,6 @@ originals/
 
 src/assets/images/*.png
 
+
+# large originals (do not commit)
+originals/
