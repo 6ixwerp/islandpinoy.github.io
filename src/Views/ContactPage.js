@@ -1,9 +1,8 @@
 // src/Views/ContactPage.js
 import React from "react";
 import SiteHeader from "./SiteHeader";
+import PictureResponsive from "../components/PictureResponsive";
 import "./ContactPage.css";
-
-import hero from "../assets/images/contactPic.webp";
 
 const FACEBOOK_URL = "https://www.facebook.com/yourpage";
 const INSTAGRAM_URL = "https://www.instagram.com/islandpinoycatering";
@@ -19,7 +18,7 @@ export default function ContactPage() {
       <div className="contact-wrap">
         <section className="contact-hero">
           <div className="contact-hero-text">
-            <h1 className="contact-title"> Maligayang Pagdating! 👋</h1>
+            <h1 className="contact-title">Mabuhay!</h1>
             <p className="contact-subtitle">
               We’d love to help plan your <strong>handaan</strong>, office party, or
               family celebration. Tell us about your event and we’ll craft a menu
@@ -44,10 +43,15 @@ export default function ContactPage() {
           </div>
 
           <div className="contact-hero-image">
-            <img
-              src={hero || "/logo512.png"}
+            <PictureResponsive
+              name="contactPic"              // uses /public/img/contactPic-{640,1280}.(avif|webp)
               alt="Island Pinoy team plating food"
-              className="hero-img"
+              widths={[640, 1280]}
+              sizes="(max-width: 900px) 100vw, 45vw"
+              width={1280}
+              height={720}
+              eager
+              className="hero-img"          // note: applies to <picture>; adjust CSS if you targeted the <img>
             />
           </div>
         </section>
@@ -93,11 +97,15 @@ export default function ContactPage() {
               <ul className="card-list">
                 <li>
                   <span className="dot" />
-                  <a href={`tel:${PHONE_TEL}`} style={{color:"#e6ebff", textDecoration:"none"}}>Call {PHONE_DISPLAY}</a>
+                  <a href={`tel:${PHONE_TEL}`} style={{ color: "#e6ebff", textDecoration: "none" }}>
+                    Call {PHONE_DISPLAY}
+                  </a>
                 </li>
                 <li>
                   <span className="dot" />
-                  <a href={`mailto:${EMAIL}`} style={{color:"#e6ebff", textDecoration:"none"}}>{EMAIL}</a>
+                  <a href={`mailto:${EMAIL}`} style={{ color: "#e6ebff", textDecoration: "none" }}>
+                    {EMAIL}
+                  </a>
                 </li>
               </ul>
             </div>

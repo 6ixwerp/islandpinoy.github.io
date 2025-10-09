@@ -1,57 +1,43 @@
-/* src/Views/GalleryPage.css */
-/* Make Gallery page background pure black */
-.gallery-page {
-  background-color: #000;   /* ← black */
-  min-height: 100vh;
+/* grid (your columns are fine) */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
 }
 
-  
-  .gallery-wrap {
-    max-width: 1200px;
-    margin: 40px auto 80px;
-    padding: 0 24px;
-  }
-  
-  .gallery-title {
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: clamp(32px, 5vw, 48px);
-    margin: 8px 0 18px;
-  }
-  
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-  }
-  
-  .gallery-item {
-    padding: 0;
-    border: 0;
-    background: transparent;
-    cursor: zoom-in;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 26px rgba(0,0,0,0.35);
-  }
-  
-  .gallery-item img {
-    display: block;
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    transition: transform .25s ease;
-  }
-  .gallery-item:hover img { transform: scale(1.03); }
-  
-  @media (max-width: 1024px) {
-    .gallery-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  @media (max-width: 700px) {
-    .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-    .gallery-item img { height: 150px; }
-  }
-  @media (max-width: 420px) {
-    .gallery-grid { grid-template-columns: 1fr; }
-    .gallery-item img { height: 180px; }
-  }
-  
+/* each tile has a fixed shape; image covers it */
+.gallery-item {
+  position: relative;
+  aspect-ratio: 4 / 3;      /* <- pick 1/1 for squares if you prefer */
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.35);
+}
+
+/* Make the picture/img fill the tile */
+.gallery-item picture,
+.gallery-item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .25s ease;
+}
+
+.gallery-item:hover img { transform: scale(1.03); }
+
+/* Responsive columns (keep your breakpoints) */
+@media (max-width: 1024px) {
+  .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 700px) {
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 420px) {
+  .gallery-grid { grid-template-columns: 1fr; }
+}

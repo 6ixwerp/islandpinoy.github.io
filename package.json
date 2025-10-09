@@ -17,8 +17,10 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "size:images": "node scripts/size-images.js",
+    "avif:prune": "node scripts/prune-avif.js 1280 --threshold=0.2",
+    "avif:prune:apply": "node scripts/prune-avif.js 1280 --threshold=0.2 --heroes=food17,food2,food3,food1,food9 --apply",
+    "build:guard": "npm run build && npm run size:images"
   },
   "eslintConfig": {
     "extends": [

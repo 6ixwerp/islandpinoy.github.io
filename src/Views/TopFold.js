@@ -1,18 +1,13 @@
 // src/Views/TopFold.js
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { openReservation } from "./openReservation";   // ← import the event helper
+import { openReservation } from "./openReservation";
 import HeroSlideshow from "./HeroSlideshow";
 import "./TopFold.css";
 
-// images of food imported
-import food3 from "../assets/images/food3.webp";
-import food2 from "../assets/images/food2.webp";
-import food17 from "../assets/images/food17.webp";
-import food1 from "../assets/images/food1.webp";
-import food9 from "../assets/images/food9.webp";
-
-const heroImages = [food17, food2, food3, food1, food9];
+// Slides correspond to files you generated in /public/img
+// e.g. /public/img/food1-{640,1280,1920}.(avif|webp)
+const slides = ["food17", "food2", "food3", "food1", "food9"];
 
 const TopFold = () => {
   const location = useLocation();
@@ -20,8 +15,8 @@ const TopFold = () => {
 
   return (
     <section className="hero" id="top">
-      {/* Background slideshow */}
-      <HeroSlideshow images={heroImages} />
+      {/* Background slideshow (only first slide eager-loaded inside component) */}
+      <HeroSlideshow names={slides} />
 
       {/* Dark overlay for text readability */}
       <div className="hero__overlay" aria-hidden="true" />
@@ -31,14 +26,19 @@ const TopFold = () => {
           <span className="addr">Catering all of San Diego, by reservation only</span>
 
           <Link className="brand" to="/">
-            <img className="brand-logo" src="/logo512.png" alt="Island Pinoy logo" width="36" height="36" />
+            <img
+              className="brand-logo"
+              src="/logo512.png"
+              alt="Island Pinoy logo"
+              width="36"
+              height="36"
+            />
             <span className="brand-name">
               Island<span className="pinoy">Pinoy</span>
             </span>
           </Link>
 
           <div className="reserve-wrap">
-            {/* Hook up the click so it opens the ReservationDrawer */}
             <button className="btn-reserve" type="button" onClick={openReservation}>
               Make a Reservation
             </button>
@@ -65,7 +65,7 @@ const TopFold = () => {
             </h1>
             <p className="sub">
               Lutong-Bahay flavors for birthdays, office events, and big handaan.
-              Island Pinoy brings a islander's twist to timeless Filipino recipes.
+              Island Pinoy brings an islander's twist to timeless Filipino recipes.
             </p>
           </div>
           <div className="card-body" />

@@ -2,69 +2,50 @@
 import React, { useState } from "react";
 import SiteHeader from "./SiteHeader";
 import MenuModal from "./MenuModal";
+import PictureResponsive from "../components/PictureResponsive";
 import "./GalleryPage.css";
-import food1 from "../assets/images/food1.webp";
-import food2 from "../assets/images/food2.webp";
-import food3 from "../assets/images/food3.webp";
-import food4 from "../assets/images/food4.webp";
-import food5 from "../assets/images/food5.webp";
-import food6 from "../assets/images/food6.webp";
-import food7 from "../assets/images/food7.webp";
-import food8 from "../assets/images/food8.webp";
-import food9 from "../assets/images/food9.webp";
-import food10 from "../assets/images/food10.webp";
-import food11 from "../assets/images/food11.webp";
-import food12 from "../assets/images/food12.webp";
-import food13 from "../assets/images/food13.webp";
-import food14 from "../assets/images/food14.webp";
-import food15 from "../assets/images/food15.webp";
-import food16 from "../assets/images/food16.webp";
-import food17 from "../assets/images/food17.webp";
-import food18 from "../assets/images/food18.webp";
 
-const photos = [
-    { src: food1, alt: "Dish 1" },
-    { src: food2, alt: "Dish 2" },
-    { src: food3, alt: "Dish 3" },
-    { src: food4, alt: "Dish 4" },
-    { src: food5, alt: "Dish 5" },
-    { src: food6, alt: "Dish 6" },
-    { src: food7, alt: "Dish 7" },
-    { src: food8, alt: "Dish 8" },
-    { src: food9, alt: "Dish 9" },
-    { src: food10, alt: "Dish 10" },
-    { src: food11, alt: "Dish 11" },
-    { src: food12, alt: "Dish 12" },
-    { src: food13, alt: "Dish 13" },
-    { src: food14, alt: "Dish 14" },
-    { src: food15, alt: "Dish 15" },
-    { src: food16, alt: "Dish 16" },
-    { src: food17, alt: "Dish 17" },
-    { src: food18, alt: "Dish 18" },
-  ];
+// Base names must exist in /public/img as name-{640,1280,1920}.(avif|webp)
+const names = [
+  "food1","food2","food3","food4","food5","food6",
+  "food7","food8","food9","food10","food11","food12",
+  "food13","food14","food15","food16","food17","food18"
+];
+
+// For the modal viewer, point to a larger version
+const photos = names.map((n, i) => ({
+  src: `/img/${n}-1280.webp`,
+  alt: `Dish ${i + 1}`
+}));
+
 export default function GalleryPage() {
   const [viewerOpen, setViewerOpen] = useState(false);
   const [startAt, setStartAt] = useState(0);
 
-  const openViewer = (index) => {
-    setStartAt(index);
-    setViewerOpen(true);
-  };
+  const openViewer = (index) => { setStartAt(index); setViewerOpen(true); };
 
   return (
     <main className="gallery-page">
       <SiteHeader />
 
       <section className="gallery-wrap">
+        {/* <h1 className="gallery-title">Gallery</h1> */}
 
         <div className="gallery-grid">
-          {photos.map((img, i) => (
-            <button key={img.src} className="gallery-item" type="button" onClick={() => openViewer(i)}>
-              <img
-                src={img.src}
-                alt={img.alt || ""}
-                loading="lazy"
-                onError={(e) => { e.currentTarget.src = "/logo512.png"; }}
+          {names.map((name, i) => (
+            <button
+              key={name}
+              className="gallery-item"
+              type="button"
+              onClick={() => openViewer(i)}
+              aria-label={`Open image ${i + 1}`}
+            >
+              <PictureResponsive
+                name={name}
+                alt={`Dish ${i + 1}`}
+                widths={[640]}                         // thumbs: one size is fine
+                sizes="(max-width: 768px) 50vw, 25vw"  // tweak as you like
+                fill                                   // makes it cover the tile
               />
             </button>
           ))}

@@ -1,32 +1,26 @@
 // src/Views/HeroSlideshow.js
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import PictureResponsive from "../components/PictureResponsive";
 import "./HeroSlideshow.css";
 
 export default function HeroSlideshow({
-  images = [],
+  names = [],
   intervalMs = 4500,
   fadeMs = 600,
   className = "",
   ariaLabel = "Food photos slideshow",
-  fit = "cover",                 // "cover" or "contain"
-  objectPosition = "50% 50%",    // e.g. "50% 35%" to bias upward
+  fit = "cover",
+  objectPosition = "50% 50%",
 }) {
   const [idx, setIdx] = useState(0);
   const [paused, setPaused] = useState(false);
   const timerRef = useRef(null);
 
-  const pics = useMemo(() => images.filter(Boolean), [images]);
-  const last = Math.max(0, pics.length - 1);
-
   useEffect(() => {
-    pics.forEach((src) => { const img = new Image(); img.src = src; });
-  }, [pics]);
-
-  useEffect(() => {
-    if (pics.length <= 1 || paused) return;
-    timerRef.current = setInterval(() => setIdx((i) => (i >= last ? 0 : i + 1)), intervalMs);
+    if (names.length <= 1 || paused) return;
+    timerRef.current = setInterval(() => setIdx(i => (i + 1) % names.length), intervalMs);
     return () => clearInterval(timerRef.current);
-  }, [pics.length, last, paused, intervalMs]);
+  }, [names.length, paused, intervalMs]);
 
   useEffect(() => {
     const onVis = () => setPaused(document.hidden);
@@ -34,13 +28,7 @@ export default function HeroSlideshow({
     return () => document.removeEventListener("visibilitychange", onVis);
   }, []);
 
-  const onKeyDown = (e) => {
-    if (!pics.length) return;
-    if (e.key === "ArrowRight") setIdx((i) => (i >= last ? 0 : i + 1));
-    if (e.key === "ArrowLeft")  setIdx((i) => (i <= 0 ? last : i - 1));
-  };
-
-  if (!pics.length) return null;
+  if (!names.length) return null;
 
   return (
     <div
@@ -49,24 +37,33 @@ export default function HeroSlideshow({
       aria-label={ariaLabel}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      onKeyDown={onKeyDown}
       tabIndex={0}
       style={{ "--fade-ms": `${fadeMs}ms`, "--fit": fit, "--pos": objectPosition }}
     >
-      {pics.map((src, i) => (
-        <img
-          key={src}
+      {names.map((name, i) => (
+        <div
+          key={name}
           className={`hero-slide ${i === idx ? "is-active" : ""}`}
-          src={src}
-          alt=""
           aria-hidden={i === idx ? "false" : "true"}
-          draggable="false"
-        />
+          style={{ position: "absolute", inset: 0, transition: "opacity 600ms", opacity: i === idx ? 1 : 0 }}
+        >
+          <PictureResponsive
+            name={name}
+            alt=""
+            eager={i === 0}
+            widths={[640, 1280, 1920]}
+            sizes="100vw"
+            width={1280}
+            height={Math.round(1280 / (16/9))}
+            fill                               // ⬅️ make it cover the slide area
+            // If you want to bias the crop, pass a custom object-position:
+            styleImg={{ objectPosition }}      // uses the prop above
+          />
+        </div>
       ))}
-
-      {pics.length > 1 && (
+      {names.length > 1 && (
         <div className="hero-dots" aria-hidden="true">
-          {pics.map((_, i) => (
+          {names.map((_, i) => (
             <button
               key={i}
               type="button"
