@@ -14,7 +14,7 @@ export default function AboutPage() {
 
       <section className="about-hero">
         <div className="about-text">
-          <h1 className="about-title"> Maligayang Pagdating! </h1>
+          <h1 className="about-title"> Mabuhay! </h1>
           <p className="about-lede">
             Island Pinoy features delectable Filipino cuisine crafted in a casual
             yet warm atmosphere. Serving San Diego County, we pride
